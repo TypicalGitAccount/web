@@ -25,7 +25,7 @@ export const PollDetail = () => {
       setPoll(poll);
     } catch (error) {
       console.log(error);
-      navigate("/not-found");
+      navigate("/web/not-found");
     }
   };
 

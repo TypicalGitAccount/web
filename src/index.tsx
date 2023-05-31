@@ -1,3 +1,4 @@
+import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
@@ -23,17 +24,16 @@ reactRoot.render(
   <>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="/" element={<PollBrowse />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<RegisterPage />} />
-
-          <Route path="/polls/:pollId" element={<PollDetail />} />
+        <Route path="/web" element={<App />}>
+          <Route path="/web" element={<PollBrowse />} />
+          <Route path="/web/login" element={<LoginPage />} />
+          <Route path="/web/signup" element={<RegisterPage />} />
+          <Route path="/web/polls/:pollId" element={<PollDetail />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/polls/create" element={<CreatePollPage />} />
-            <Route path="/polls/manage" element={<PollManage />} />
+            <Route path="/web/polls/create" element={<CreatePollPage />} />
+            <Route path="/web/polls/manage" element={<PollManage />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
+          <Route path="/web/*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

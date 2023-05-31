@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: Props) => {
     const data = await AuthApi.registerUser(email, username, password);
 
     if (data) {
-      navigate("/login");
+      navigate("/web/login");
     } else {
       alert("Error during registration.");
     }
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: Props) => {
 
     if (data) {
       updateAuthStates(data);
-      navigate("/");
+      navigate("/web");
     }
   };
 
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: Props) => {
     setAuthTokens(null);
     setUser(null);
     localStorage.removeItem(AUTH_TOKENS);
-    navigate("/");
+    navigate("/web");
   };
 
   const refreshToken = async () => {

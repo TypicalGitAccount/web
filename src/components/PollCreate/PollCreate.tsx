@@ -154,7 +154,10 @@ const PollCreate = () => {
 
     if (pollData.poll_data.end_date) {
       const endDate = new Date(pollData.poll_data.end_date);
-      if (isNaN(endDate.getTime()) || (endDate).setHours(0, 0, 0, 0) < (new Date()).setHours(0, 0, 0, 0)) {
+      if (
+        isNaN(endDate.getTime()) ||
+        endDate.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0)
+      ) {
         localErrorList.push("The end date should be later than now");
       }
     }
@@ -194,7 +197,7 @@ const PollCreate = () => {
     if (authTokens) {
       const result = await PollApi.create(pollData, authTokens?.access!);
       if (result) {
-        navigate("/");
+        navigate("/web");
       } else {
         setErrorList(prevState => [...prevState, "Something went wrong"]);
       }

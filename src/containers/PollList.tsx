@@ -54,7 +54,7 @@ export const PollList = () => {
             title={item.title}
             author={item.author.username}
             endDate={format(new Date(item.endDate), "dd MMMM yyyy")}
-            onPollClick={() => navigate("/polls/" + item.id)}
+            onPollClick={() => navigate("/web/polls/" + item.id)}
           />
         ))}
     </Container>

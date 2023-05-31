@@ -1,4 +1,4 @@
-const BASE_URL = "http://avtobus403.pythonanywhere.com";
+const BASE_URL = "https://avtobus403.pythonanywhere.com";
 
 const POLLS_PREVIEW = `${BASE_URL}/polls/get_preview`;
 const POLLS_ALLOWED_PREVIEW = `${BASE_URL}/polls/available`;

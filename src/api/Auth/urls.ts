@@ -1,4 +1,4 @@
-const BASE_URL = "http://avtobus403.pythonanywhere.com";
+const BASE_URL = "https://avtobus403.pythonanywhere.com";
 
 const REGISTER_URL = `${BASE_URL}/auth/register`;
 const TOKEN_URL = `${BASE_URL}/auth/token`;

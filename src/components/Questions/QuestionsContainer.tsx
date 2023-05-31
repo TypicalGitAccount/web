@@ -39,7 +39,7 @@ export const QuestionsContainer = (props: IQuestionsContainer) => {
       );
 
       if (result) {
-        navigate("/");
+        navigate("/web");
       } else {
         alert("Some thing went wrong");
       }
