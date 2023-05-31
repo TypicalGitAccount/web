@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import GlobalStyles from "./components/GlobalStyles";
+import { Outlet } from "react-router-dom";
 
-function App() {
+import { Header } from "./components/Header/Header";
+import { Footer } from "./components/Footer/Footer";
+
+import styled from "styled-components";
+import { AuthProvider } from "./сontext/AuthProvider";
+
+
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles />
+      <PageContainer>
+        <AuthProvider>
+          <Header />
+          <PageContent>
+            <Outlet />
+          </PageContent>
+          <Footer />
+        </AuthProvider>
+      </PageContainer>
+    </>
   );
 }
 
-export default App;
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const PageContent = styled.div`
+  flex: 1;
+  padding: 0 150px;
+`;
