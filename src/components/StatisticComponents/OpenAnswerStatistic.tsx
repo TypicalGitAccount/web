@@ -1,8 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { StatisticComponentProps } from "./interfaces";
 import BaseQuestion from "../Questions/BaseQuestion";
-import { StyledInput } from "../GlobalStyles";
 import styled from "styled-components";
+
+const StyledStatisticInput = styled.textarea`
+  box-sizing: content-box; // We use content-box to exclude padding from width and height
+  width: 500px;
+  font-size: 18px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  resize: none;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const AutoSizeTextarea = props => {
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    textareaRef.current.style.height = "auto";
+    textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+  }, [props.value]);
+
+  return <StyledStatisticInput ref={textareaRef} {...props} />;
+};
 
 const OpenAnswerStatistic = (statistic: StatisticComponentProps) => {
   const { data, isAnonymous } = statistic;
@@ -16,14 +42,14 @@ const OpenAnswerStatistic = (statistic: StatisticComponentProps) => {
   const renderStatistic = () => {
     if (isAnonymous) {
       return data.option_data?.map((item, index) => (
-        <StyledInput key={index} placeholder={item.answer} readOnly />
+        <AutoSizeTextarea key={index} value={item.answer} readOnly />
       ));
     }
 
     return data.option_data?.map((item, index) => (
       <ContainerItem key={index}>
         {item.username}
-        <StyledInput placeholder={item.answer} readOnly />
+        <AutoSizeTextarea value={item.answer} readOnly />
       </ContainerItem>
     ));
   };
@@ -31,9 +57,11 @@ const OpenAnswerStatistic = (statistic: StatisticComponentProps) => {
   return (
     <BaseQuestion title={data.question_info.title}>
       <Container>
-        <StyledButton onClick={toggleVisibility}>
-          {isVisible ? "Hide Section" : "Show Section"}
-        </StyledButton>
+        <ButtonContainer>
+          <StyledButton onClick={toggleVisibility}>
+            {isVisible ? "Hide Section" : "Show Section"}
+          </StyledButton>
+        </ButtonContainer>
         {isVisible && renderStatistic()}
       </Container>
     </BaseQuestion>
@@ -47,10 +75,15 @@ const Container = styled.div`
   gap: 20px;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+`;
+
 const ContainerItem = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   gap: 5px;
 `;
 
